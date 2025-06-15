@@ -192,6 +192,29 @@
       align-items: flex-end;
       gap: 0.5rem;
     }
+  
+    #console-log {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 280px;
+      max-height: 60vh;
+      overflow-y: auto;
+      background-color: rgba(0, 0, 0, 0.85);
+      color: #bfa9d1;
+      font-family: 'VT323', monospace;
+      font-size: 1rem;
+      line-height: 1.5;
+      padding: 1rem;
+      border: 1px solid #bfa9d1;
+      display: none;
+      z-index: 20;
+    }
+
+    #console-log p {
+      margin: 0 0 0.5rem 0;
+      white-space: pre-wrap;
+    }
   </style>
 </head>
 <body>
@@ -255,6 +278,10 @@
       <div id="user-final"></div>
     </div>
   </div>
+  <div id="console-log"></div>
+      <div id="user-final"></div>
+    </div>
+  </div>
     <div id="user-final"></div>
   </div>
     <div id="user-final"></div>
@@ -301,6 +328,7 @@
   const inputGlyph = document.getElementById('input-glyph');
   const response = document.getElementById('user-response');
   const final = document.getElementById('user-final');
+  const consoleLog = document.getElementById('console-log');
 
   let inputRevealed = false;
   inputGlyph.addEventListener('click', () => {
@@ -314,10 +342,32 @@
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       const value = input.value.trim().toLowerCase();
-      if (value === 'blackhole') {
-        response.innerText = 'I hear you.';
-        response.classList.add('visible');
+      if (value === 'ethereum') {
+      response.innerText = 'I hear you.';
+      response.classList.add('visible');
+      setTimeout(() => {
+        response.classList.remove('visible');
+        final.innerText = '0x5d6453385f1FecE84beBBB98fdD1d40cd718Aca3';
+        final.style.opacity = '1';
         setTimeout(() => {
+          final.style.opacity = '0';
+          input.style.display = 'inline-block';
+          input.focus();
+        }, 5000);
+      }, 5000);
+    } else if (value === 'archive') {
+      response.innerText = 'Accessing archive...';
+      response.classList.add('visible');
+      setTimeout(() => {
+        response.classList.remove('visible');
+        consoleLog.style.display = 'block';
+        const entry = document.createElement('p');
+        entry.textContent = '> archive
+↳ Accessing archive...';
+        consoleLog.appendChild(entry);
+        input.style.display = 'inline-block';
+        input.focus();
+      }, 5000);
           input.style.display = 'none';
           response.classList.remove('visible');
           setTimeout(() => {
