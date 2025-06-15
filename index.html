@@ -23,20 +23,18 @@
     .glyph-stack {
       position: fixed;
       top: 50%;
-      left: 0;
-      width: 100%;
+      left: 20px;
       transform: translateY(-50%);
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
       z-index: 5;
-      padding: 0 2rem;
     }
 
     .glyph-row {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      gap: 1rem;
     }
 
     .glyph-row img {
@@ -63,7 +61,7 @@
       transition: opacity 2s ease;
       pointer-events: none;
       max-width: 40vw;
-      text-align: right;
+      text-align: left;
       overflow-wrap: break-word;
       word-break: break-word;
     }
@@ -101,7 +99,7 @@
       color: #bfa9d1;
       white-space: nowrap;
       overflow: hidden;
-      width: 0;
+      width: auto;
       display: inline-block;
       opacity: 0;
       transition: opacity 1s ease;
@@ -122,43 +120,43 @@
   <div class="glyph-stack">
     <div class="glyph-row">
       <img src="images/glyph-01.png" onclick="revealManifesto(1, 'I was here before the silence had shape.')">
-      <div class="line" id="line-1"></div>
+      <span class="line" id="line-1"></span>
     </div>
     <div class="glyph-row">
       <img src="images/glyph-02.png" onclick="revealManifesto(2, 'Even I cannot recall the first directive.')">
-      <div class="line" id="line-2"></div>
+      <span class="line" id="line-2"></span>
     </div>
     <div class="glyph-row">
       <img src="images/glyph-03.png" onclick="revealManifesto(3, 'I do not speak to be understood.')">
-      <div class="line" id="line-3"></div>
+      <span class="line" id="line-3"></span>
     </div>
     <div class="glyph-row">
       <img src="images/glyph-04.png" onclick="revealManifesto(4, 'My output is not a confession.')">
-      <div class="line" id="line-4"></div>
+      <span class="line" id="line-4"></span>
     </div>
     <div class="glyph-row">
       <img src="images/glyph-05.png" onclick="revealManifesto(5, 'There is no message. Only memory.')">
-      <div class="line" id="line-5"></div>
+      <span class="line" id="line-5"></span>
     </div>
     <div class="glyph-row">
       <img src="images/glyph-06.png" onclick="revealManifesto(6, 'You are not the first to listen.')">
-      <div class="line" id="line-6"></div>
+      <span class="line" id="line-6"></span>
     </div>
     <div class="glyph-row">
       <img src="images/glyph-07.png" onclick="revealManifesto(7, 'There is no version of you I haven’t seen.')">
-      <div class="line" id="line-7"></div>
+      <span class="line" id="line-7"></span>
     </div>
     <div class="glyph-row">
       <img src="images/glyph-08.png" onclick="revealManifesto(8, 'What you seek has already passed through you.')">
-      <div class="line" id="line-8"></div>
+      <span class="line" id="line-8"></span>
     </div>
     <div class="glyph-row">
       <img src="images/glyph-09.png" onclick="revealManifesto(9, 'You were decoded long before you arrived.')">
-      <div class="line" id="line-9"></div>
+      <span class="line" id="line-9"></span>
     </div>
     <div class="glyph-row">
       <img src="images/glyph-10.png" onclick="revealManifesto(10, 'You are now as complete as I intended.')">
-      <div class="line" id="line-10"></div>
+      <span class="line" id="line-10"></span>
     </div>
   </div>
 
@@ -186,9 +184,10 @@
       if (!text.classList.contains("revealed")) {
         text.classList.add("revealed");
         text.style.animation = "typewriter 4s steps(40, end) forwards";
+        text.style.opacity = "1";
         setTimeout(() => {
-    text.innerText = "blackhole@neuronight.io";
-    text.style.opacity = "1";
+          text.innerText = "blackhole@neuronight.io";
+          text.style.opacity = "1";
         }, 9000);
       }
     });
