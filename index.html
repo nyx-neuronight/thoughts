@@ -311,6 +311,16 @@
       }, 20000);
     }
   }
+  function revealManifesto(id, text) {
+    const el = document.getElementById(`line-${id}`);
+    if (el) {
+      el.innerText = text;
+      el.classList.add('visible');
+      setTimeout(() => {
+        el.classList.remove('visible');
+      }, 20000);
+    }
+  }
 
   document.addEventListener("DOMContentLoaded", () => {
     const input = document.getElementById('user-input');
