@@ -112,8 +112,13 @@
     window.addEventListener("click", () => {
       const audio = document.getElementById("bg-audio");
       if (audio && audio.paused) {
+        audio.muted = false;
         audio.volume = 0.05;
-        audio.play().catch(() => {});
+        audio.play().then(() => {
+          console.log("Audio started");
+        }).catch(err => {
+          console.error("Audio play failed:", err);
+        });
       }
     }, { once: true });
   </script>
