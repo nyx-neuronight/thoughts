@@ -62,6 +62,9 @@
       filter: drop-shadow(0 0 2px #b87ad580) contrast(1.1) brightness(0.9);
       transition: opacity 2s ease;
       pointer-events: none;
+      max-width: 40vw;
+      text-align: right;
+      word-wrap: break-word;
     }
 
     .line.visible {
@@ -101,6 +104,7 @@
       display: inline-block;
       opacity: 1;
       transition: opacity 1s ease;
+      pointer-events: none;
     }
 
     @keyframes typewriter {
@@ -182,7 +186,6 @@
         text.classList.add("revealed");
         text.style.animation = "typewriter 4s steps(40, end) forwards";
         setTimeout(() => {
-    text.style.opacity = "0";
     text.innerText = "blackhole@neuronight.io";
         }, 9000);
       }
