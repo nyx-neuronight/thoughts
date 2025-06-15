@@ -289,6 +289,7 @@
   </div>
 
   <script>
+  // Global so glyphs can call it immediately
   function revealManifesto(id, text) {
     const el = document.getElementById(`line-${id}`);
     if (el) {
@@ -323,28 +324,21 @@
       input.value = '';
 
       if (value === 'ethereum') {
-      response.innerText = 'I hear you.';
-      response.classList.add('visible');
-      input.style.opacity = '0';
-      setTimeout(() => {
-        response.classList.remove('visible');
-        input.style.display = 'none';
-        final.innerText = '0x5d6453385f1FecE84beBBB98fdD1d40cd718Aca3';
-        final.style.opacity = '1';
+        response.innerText = 'I hear you.';
+        response.classList.add('visible');
+        input.style.opacity = '0';
         setTimeout(() => {
-          final.style.opacity = '0';
-          input.style.display = 'inline-block';
-          input.style.opacity = '1';
-          input.focus();
-        }, 5000);
-      }, 5000);
+          input.style.display = 'none';
           response.classList.remove('visible');
           final.innerText = '0x5d6453385f1FecE84beBBB98fdD1d40cd718Aca3';
           final.style.opacity = '1';
           setTimeout(() => {
             final.style.opacity = '0';
-            input.style.display = 'inline-block';
-            input.focus();
+            setTimeout(() => {
+              input.style.display = 'inline-block';
+              input.style.opacity = '1';
+              input.focus();
+            }, 500);
           }, 5000);
         }, 5000);
       } else {
@@ -353,6 +347,7 @@
       }
     });
 
+    // Footer glyph
     const footerGlyph = document.getElementById("glyph-click");
     if (footerGlyph) {
       footerGlyph.addEventListener("click", () => {
@@ -369,6 +364,7 @@
       });
     }
 
+    // Audio trigger
     window.addEventListener("click", () => {
       const audio = document.getElementById("bg-audio");
       if (audio && audio.paused) {
