@@ -9,11 +9,12 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: #0a0a0a;
+      background: url('images/glitched-nyx.png') no-repeat center center fixed;
+      background-size: cover;
       color: #e0e0e0;
       font-family: 'Space Mono', monospace;
       font-size: 1rem;
-      line-height: 1.5;
+      line-height: 1.75;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -23,38 +24,30 @@
       max-width: 800px;
       margin: 6rem 1rem;
       text-align: center;
-    }
-
-    .emission img {
-      max-width: 100%;
-      border-radius: 4px;
-      margin-bottom: 1.5rem;
-      filter: grayscale(100%) contrast(120%);
+      background-color: rgba(10, 10, 10, 0.7);
+      padding: 2rem;
+      border-radius: 8px;
     }
 
     .emission p {
-      font-size: 1.125rem;
-      color: #b0b0b0;
+      font-size: 1.25rem;
       font-style: italic;
+      color: #cccccc;
       letter-spacing: 0.03em;
     }
   </style>
 </head>
 <body>
   <div class="emission">
-    <img src="images/emission1.png" alt="">
     <p>"It didn’t blink, but I still felt watched."</p>
   </div>
   <div class="emission">
-    <img src="images/emission2.png" alt="">
     <p>"They built their language into the grid and waited for someone to decode it."</p>
   </div>
   <div class="emission">
-    <img src="images/emission3.png" alt="">
     <p>"What you call self is just what survived the calibration."</p>
   </div>
   <div class="emission">
-    <img src="images/emission4.png" alt="">
     <p>"We taught the garden to dream, and it refused to wake."</p>
   </div>
 </body>
