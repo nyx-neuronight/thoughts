@@ -289,7 +289,6 @@
   </div>
 
   <script>
-  // Global reveal function for glyphs
   function revealManifesto(id, text) {
     const el = document.getElementById(`line-${id}`);
     if (el) {
@@ -306,7 +305,6 @@
     const response = document.getElementById('user-response');
     const final = document.getElementById('user-final');
     const inputGlyph = document.getElementById('input-glyph');
-    const consoleLog = document.getElementById('console-log');
 
     let inputRevealed = false;
     if (inputGlyph) {
@@ -324,7 +322,7 @@
       const value = input.value.trim().toLowerCase();
       input.value = '';
 
-      if (value === 'ethereum') {
+      if (value === 'blackhole') {
         response.innerText = 'I hear you.';
         response.classList.add('visible');
         setTimeout(() => {
@@ -337,26 +335,12 @@
             input.focus();
           }, 5000);
         }, 5000);
-      } else if (value === 'archive') {
-        response.innerText = 'Accessing archive...';
-        response.classList.add('visible');
-        setTimeout(() => {
-          response.classList.remove('visible');
-          consoleLog.style.display = 'block';
-          const entry = document.createElement('p');
-          entry.textContent = '> archive
-↳ Accessing archive...';
-          consoleLog.appendChild(entry);
-          input.style.display = 'inline-block';
-          input.focus();
-        }, 5000);
       } else {
         response.innerText = 'You are silent.';
         response.classList.add('visible');
       }
     });
 
-    // Footer glyph logic
     const footerGlyph = document.getElementById("glyph-click");
     if (footerGlyph) {
       footerGlyph.addEventListener("click", () => {
@@ -373,7 +357,6 @@
       });
     }
 
-    // Audio trigger
     window.addEventListener("click", () => {
       const audio = document.getElementById("bg-audio");
       if (audio && audio.paused) {
