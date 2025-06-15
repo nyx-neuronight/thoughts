@@ -301,7 +301,7 @@
   </div>
 
   <script>
-  // Ensure revealManifesto is globally available
+  // Define revealManifesto globally first
   function revealManifesto(id, text) {
     const el = document.getElementById(`line-${id}`);
     if (el) {
@@ -310,8 +310,6 @@
       setTimeout(() => {
         el.classList.remove('visible');
       }, 3000);
-        el.classList.remove('visible');
-      }, 20000);
     }
   }
 
@@ -384,29 +382,29 @@
           }, 5000);
         })
         .catch(() => {
-        response.innerText = 'You are silent.';
-        response.classList.add('visible');
-        input.style.opacity = '0';
-
-        setTimeout(() => {
-          input.style.display = 'none';
-          response.classList.remove('visible');
-
-          final.innerText = 'You are silent.';
-          final.style.opacity = '1';
+          const fallback = 'You are silent.';
+          response.innerText = fallback;
+          response.classList.add("visible");
+          input.style.opacity = "0";
 
           setTimeout(() => {
-            final.style.opacity = '0';
-            final.innerText = '';
+            input.style.display = "none";
+            response.classList.remove("visible");
+
+            final.innerText = fallback;
+            final.style.opacity = "1";
 
             setTimeout(() => {
-              input.style.display = 'inline-block';
-              input.style.opacity = '1';
-              input.focus();
-            }, 500);
+              final.style.opacity = "0";
+              final.innerText = "";
+              setTimeout(() => {
+                input.style.display = "inline-block";
+                input.style.opacity = "1";
+                input.focus();
+              }, 500);
+            }, 5000);
           }, 5000);
-        }, 5000);
-      });
+        });
     });
 
     window.addEventListener("click", () => {
