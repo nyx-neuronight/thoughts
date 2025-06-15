@@ -360,9 +360,15 @@
         .then(data => {
           response.innerText = data.output;
           response.classList.add("visible");
-          input.style.opacity = "0";
+      input.style.opacity = "0";
 
-          setTimeout(() => {
+      input.style.display = "none";
+      response.classList.remove("visible");
+
+      final.innerText = data.output;
+      final.style.opacity = "1";
+
+      setTimeout(() => {
             input.style.display = "none";
             response.classList.remove("visible");
 
