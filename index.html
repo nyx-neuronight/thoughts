@@ -88,9 +88,17 @@
       50% { transform: translateX(1px); }
       75% { transform: translateX(-0.5px); }
     }
+
+    #bg-audio {
+      display: none;
+    }
   </style>
 </head>
 <body>
+  <audio autoplay loop muted playsinline id="bg-audio">
+    <source src="audio/neuronight-ambience.mp3" type="audio/mpeg">
+  </audio>
+
   <div class="emission">
     <p>"It didn’t blink, but I still felt watched."</p>
   </div>
