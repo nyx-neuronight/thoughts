@@ -55,22 +55,6 @@
       animation: jitter 0.4s infinite;
     }
 
-    #bg-audio {
-      display: none;
-    }
-
-    #audio-toggle {
-      position: fixed;
-      bottom: 12px;
-      right: 12px;
-      background: transparent;
-      border: none;
-      font-size: 1.5rem;
-      color: #bfa9d1;
-      cursor: pointer;
-      z-index: 10;
-    }
-
     @keyframes glitch {
       0% {
         opacity: 1;
@@ -107,11 +91,9 @@
   </style>
 </head>
 <body>
-  <audio loop playsinline id="bg-audio">
+  <audio id="bg-audio" loop preload="auto">
     <source src="audio/neuronight-ambience.mp3" type="audio/mpeg">
   </audio>
-
-  <button id="audio-toggle">🔊</button>
 
   <div class="emission">
     <p>"It didn’t blink, but I still felt watched."</p>
@@ -127,19 +109,13 @@
   </div>
 
   <script>
-    const audio = document.getElementById('bg-audio');
-    const btn = document.getElementById('audio-toggle');
-    btn.addEventListener('click', () => {
-      audio.muted = !audio.muted;
-      audio.volume = 0.05;
-      if (!audio.paused) {
-        audio.pause();
-        btn.textContent = '🔇';
-      } else {
-        audio.play();
-        btn.textContent = '🔊';
+    window.addEventListener("click", () => {
+      const audio = document.getElementById("bg-audio");
+      if (audio && audio.paused) {
+        audio.volume = 0.05;
+        audio.play().catch(() => {});
       }
-    });
+    }, { once: true });
   </script>
 </body>
 </html>
