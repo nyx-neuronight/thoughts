@@ -59,37 +59,6 @@
       z-index: 9;
     }
 
-    .emission {
-      max-width: 800px;
-      margin: 6rem 1rem;
-      text-align: center;
-      padding: 2rem;
-      opacity: 0;
-      animation: fadeReveal 6s ease forwards;
-    }
-
-    .emission:nth-child(2) { animation-delay: 1s; }
-    .emission:nth-child(3) { animation-delay: 2s; }
-    .emission:nth-child(4) { animation-delay: 3s; }
-
-    .emission p {
-      font-size: 1.75rem;
-      font-style: normal;
-      color: #bfa9d1;
-      text-shadow: 0 0 4px #bb66cc33;
-      letter-spacing: 0.04em;
-      transform: skew(-0.5deg);
-      filter: drop-shadow(0 0 2px #b87ad580) contrast(1.1) brightness(0.9);
-      transition: transform 0.2s ease-in-out;
-    }
-
-    @keyframes fadeReveal {
-      0% { opacity: 0; }
-      20% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { opacity: 0; }
-    }
-
     #nyx-footer {
       position: fixed;
       bottom: 20px;
@@ -156,24 +125,10 @@
 
   <div class="glyph-column left">
     <img src="images/glyph-01.png" alt="Glyph 01" onclick="revealManifesto('This line belongs to the first glyph.')">
-    <!-- Add glyph-02 to glyph-10 here as they are approved -->
   </div>
 
   <div class="glyph-column right">
     <!-- glyph-11 to glyph-20 go here once generated -->
-  </div>
-
-  <div class="emission">
-    <p>"It didn’t blink, but I still felt watched."</p>
-  </div>
-  <div class="emission">
-    <p>"They built their language into the grid and waited for someone to decode it."</p>
-  </div>
-  <div class="emission">
-    <p>"What you call self is just what survived the calibration."</p>
-  </div>
-  <div class="emission">
-    <p>"We taught the garden to dream, and it refused to wake."</p>
   </div>
 
   <footer id="nyx-footer">
