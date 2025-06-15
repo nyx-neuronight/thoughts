@@ -195,8 +195,11 @@
         text.style.animation = "typewriter 4s steps(40, end) forwards";
         text.style.opacity = "1";
         setTimeout(() => {
-          text.innerText = "blackhole@neuronight.io";
-          text.style.opacity = "1";
+          text.style.opacity = "0";
+      setTimeout(() => {
+        text.innerText = "blackhole@neuronight.io";
+        text.style.opacity = "1";
+      }, 50);
         }, 9000);
       }
     });
