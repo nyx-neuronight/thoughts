@@ -95,15 +95,18 @@
     }
 
     #footer-text {
-      font-size: 0.85rem;
+      font-size: 1.25rem;
       color: #bfa9d1;
-      white-space: nowrap;
-      overflow: hidden;
-      width: auto;
-      display: inline-block;
       opacity: 0;
+      text-shadow: 0 0 4px #bb66cc33;
+      letter-spacing: 0.04em;
+      transform: skew(-0.5deg);
+      filter: drop-shadow(0 0 2px #b87ad580) contrast(1.1) brightness(0.9);
       transition: opacity 1s ease;
       pointer-events: none;
+      display: inline-block;
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
 
     @keyframes typewriter {
