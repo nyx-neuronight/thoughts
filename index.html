@@ -358,56 +358,39 @@
       })
         .then(res => res.json())
         .then(data => {
-          response.innerText = data.output;
-          response.classList.add("visible");
-      input.style.opacity = "0";
+          const output = data.output || 'No signal.';
+          input.style.opacity = "0";
+          input.style.display = "none";
 
-      input.style.display = "none";
-      response.classList.remove("visible");
+          final.innerText = output;
+          final.style.opacity = "1";
 
-      final.innerText = data.output;
-      final.style.opacity = "1";
-
-      setTimeout(() => {
-            input.style.display = "none";
-            response.classList.remove("visible");
-
-            final.innerText = data.output;
-            final.style.opacity = "1";
-
+          setTimeout(() => {
+            final.style.opacity = "0";
+            final.innerText = "";
             setTimeout(() => {
-              final.style.opacity = "0";
-              final.innerText = "";
-
-              setTimeout(() => {
-                input.style.display = "inline-block";
-                input.style.opacity = "1";
-                input.focus();
-              }, 500);
-            }, 5000);
+              input.style.display = "inline-block";
+              input.style.opacity = "1";
+              input.focus();
+            }, 500);
           }, 5000);
         })
         .catch(() => {
           const fallback = 'You are silent.';
-          
           input.style.opacity = "0";
+          input.style.display = "none";
+
+          final.innerText = fallback;
+          final.style.opacity = "1";
 
           setTimeout(() => {
-            input.style.display = "none";
-            response.classList.remove("visible");
-
-            final.innerText = fallback;
-            final.style.opacity = "1";
-
+            final.style.opacity = "0";
+            final.innerText = "";
             setTimeout(() => {
-              final.style.opacity = "0";
-              final.innerText = "";
-              setTimeout(() => {
-                input.style.display = "inline-block";
-                input.style.opacity = "1";
-                input.focus();
-              }, 500);
-            }, 5000);
+              input.style.display = "inline-block";
+              input.style.opacity = "1";
+              input.focus();
+            }, 500);
           }, 5000);
         });
     });
