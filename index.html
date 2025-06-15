@@ -168,6 +168,20 @@
       transform: skew(-0.5deg);
       filter: drop-shadow(0 0 2px #b87ad580) contrast(1.1) brightness(0.9);
     }
+  
+    #input-glyph {
+      width: 36px;
+      height: auto;
+      opacity: 0.06;
+      filter: drop-shadow(0 0 2px #bfa9d1) drop-shadow(0 0 5px #bfa9d1);
+      transition: opacity 0.6s ease, transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    #input-glyph:hover {
+      opacity: 0.3;
+      transform: scale(1.08);
+    }
   </style>
 </head>
 <body>
@@ -224,8 +238,11 @@
   </footer>
 
   <div id="user-input-wrapper">
-    <input id="user-input" type="text" placeholder="..." autocomplete="off" />
+    <img id="input-glyph" src="images/nyx-glyph.png" alt="Input Glyph" />
+    <input id="user-input" type="text" placeholder="..." autocomplete="off" style="display:none;" />
     <div id="user-response"></div>
+    <div id="user-final"></div>
+  </div>
     <div id="user-final"></div>
   </div>
   </div>
@@ -267,8 +284,14 @@
 
   // User input logic
   const input = document.getElementById('user-input');
+  const inputGlyph = document.getElementById('input-glyph');
   const response = document.getElementById('user-response');
   const final = document.getElementById('user-final');
+
+  inputGlyph.addEventListener('click', () => {
+    input.style.display = 'inline-block';
+    input.focus();
+  });
 
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
