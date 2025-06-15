@@ -87,6 +87,7 @@
       width: 0;
       display: inline-block;
       opacity: 1;
+      transition: opacity 1s ease;
     }
 
     @keyframes typewriter {
@@ -171,6 +172,9 @@
       if (!text.classList.contains("revealed")) {
         text.classList.add("revealed");
         text.style.animation = "typewriter 4s steps(40, end) forwards";
+        setTimeout(() => {
+          text.style.opacity = "0";
+        }, 9000); // waits for typing (4s) + delay (5s)
       }
     });
   </script>
