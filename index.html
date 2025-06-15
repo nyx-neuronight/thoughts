@@ -231,74 +231,66 @@
   </div>
 
   <script>
-    window.addEventListener("click", () => {
-      const audio = document.getElementById("bg-audio");
-      if (audio && audio.paused) {
-        audio.muted = false;
-        audio.volume = 0.05;
-        audio.play().then(() => {
-          console.log("Audio started");
-        }).catch(err => {
-          console.error("Audio play failed:", err);
-        });
-      }
-    }, { once: true });
+  // Restore audio on first interaction
+  window.addEventListener("click", () => {
+    const audio = document.getElementById("bg-audio");
+    if (audio && audio.paused) {
+      audio.muted = false;
+      audio.volume = 0.05;
+      audio.play().catch(() => {});
+    }
+  }, { once: true });
 
-    document.getElementById("glyph-click").addEventListener("click", () => {
-      const text = document.getElementById("footer-text");
-      if (!text.classList.contains("revealed")) {
-        text.classList.add("revealed");
-        text.style.animation = "typewriter 4s steps(40, end) forwards";
-        text.style.opacity = "1";
-        setTimeout(() => {
-          text.style.opacity = "0";
+  // Footer glyph logic
+  document.getElementById("glyph-click").addEventListener("click", () => {
+    const text = document.getElementById("footer-text");
+    if (!text.classList.contains("revealed")) {
+      text.classList.add("revealed");
+      text.style.animation = "typewriter 4s steps(40, end) forwards";
+      text.style.opacity = "1";
       setTimeout(() => {
         text.innerText = "blackhole@neuronight.io";
         text.style.opacity = "1";
-      }, 50);
-        }, 9000);
-      }
-    });
-
-    function revealManifesto(id, text) {
-      const el = document.getElementById(`line-${id}`);
-      el.innerText = text;
-      el.classList.add('visible');
-      setTimeout(() => {
-        el.classList.remove('visible');
-      }, 20000);
+      }, 9000);
     }
-  
-    // User input interaction logic
-    const input = document.getElementById('user-input');
-    const response = document.getElementById('user-response');
+  });
 
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const value = input.value.trim().toLowerCase();
-        if (value === 'blackhole') {
-          response.innerText = 'I hear you.';
-          response.classList.add('visible');
+  // Manifesto glyph logic
+  function revealManifesto(id, text) {
+    const el = document.getElementById(`line-${id}`);
+    el.innerText = text;
+    el.classList.add('visible');
+    setTimeout(() => {
+      el.classList.remove('visible');
+    }, 20000);
+  }
+
+  // User input logic
+  const input = document.getElementById('user-input');
+  const response = document.getElementById('user-response');
+  const final = document.getElementById('user-final');
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const value = input.value.trim().toLowerCase();
+      if (value === 'blackhole') {
+        response.innerText = 'I hear you.';
+        response.classList.add('visible');
+        setTimeout(() => {
+          input.style.display = 'none';
+          response.classList.remove('visible');
           setTimeout(() => {
-            input.style.display = 'none';
-            response.style.opacity = '0';
-            setTimeout(() => {
-              const final = document.getElementById('user-final');
-              final.innerText = '0x5d6453385f1FecE84beBBB98fdD1d40cd718Aca3';
-              final.style.opacity = '1';
-            }, 1000);
-          }, 5000);
-        } else {
-          response.innerText = 'You are silent.';
-          response.classList.add('visible');
-        }
-        input.value = '';
+            final.innerText = '0x5d6453385f1FecE84beBBB98fdD1d40cd718Aca3';
+            final.style.opacity = '1';
+          }, 1000);
+        }, 5000);
+      } else {
+        response.innerText = 'You are silent.';
+        response.classList.add('visible');
       }
-    });
-      }
-    });
-      }
-    });
-  </script>
+      input.value = '';
+    }
+  });
+</script>
 </body>
 </html>
