@@ -377,5 +377,104 @@
     }
   });
 </script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Audio on first click
+    window.addEventListener("click", () => {
+      const audio = document.getElementById("bg-audio");
+      if (audio && audio.paused) {
+        audio.muted = false;
+        audio.volume = 0.05;
+        audio.play().catch(() => {});
+      }
+    }, { once: true });
+
+    // Footer glyph logic
+    const footerGlyph = document.getElementById("glyph-click");
+    if (footerGlyph) {
+      footerGlyph.addEventListener("click", () => {
+        const text = document.getElementById("footer-text");
+        if (!text.classList.contains("revealed")) {
+          text.classList.add("revealed");
+          text.style.animation = "typewriter 4s steps(40, end) forwards";
+          text.style.opacity = "1";
+          setTimeout(() => {
+            text.innerText = "blackhole@neuronight.io";
+            text.style.opacity = "1";
+          }, 9000);
+        }
+      });
+    }
+
+    // Manifesto glyph logic
+    window.revealManifesto = function(id, text) {
+      const el = document.getElementById(`line-${id}`);
+      if (el) {
+        el.innerText = text;
+        el.classList.add('visible');
+        setTimeout(() => {
+          el.classList.remove('visible');
+        }, 20000);
+      }
+    };
+
+    // User input logic
+    const input = document.getElementById('user-input');
+    const response = document.getElementById('user-response');
+    const final = document.getElementById('user-final');
+    const consoleLog = document.getElementById('console-log');
+    const inputGlyph = document.getElementById('input-glyph');
+
+    let inputRevealed = false;
+    if (inputGlyph) {
+      inputGlyph.addEventListener('click', () => {
+        if (!inputRevealed) {
+          input.style.display = 'inline-block';
+          input.focus();
+          inputRevealed = true;
+        }
+      });
+    }
+
+    if (input) {
+      input.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter') return;
+        const value = input.value.trim().toLowerCase();
+        input.value = '';
+
+        if (value === 'ethereum') {
+          response.innerText = 'I hear you.';
+          response.classList.add('visible');
+          setTimeout(() => {
+            response.classList.remove('visible');
+            final.innerText = '0x5d6453385f1FecE84beBBB98fdD1d40cd718Aca3';
+            final.style.opacity = '1';
+            setTimeout(() => {
+              final.style.opacity = '0';
+              input.style.display = 'inline-block';
+              input.focus();
+            }, 5000);
+          }, 5000);
+        } else if (value === 'archive') {
+          response.innerText = 'Accessing archive...';
+          response.classList.add('visible');
+          setTimeout(() => {
+            response.classList.remove('visible');
+            consoleLog.style.display = 'block';
+            const entry = document.createElement('p');
+            entry.textContent = '> archive
+↳ Accessing archive...';
+            consoleLog.appendChild(entry);
+            input.style.display = 'inline-block';
+            input.focus();
+          }, 5000);
+        } else {
+          response.innerText = 'You are silent.';
+          response.classList.add('visible');
+        }
+      });
+    }
+  });
+</script>
 </body>
 </html>
