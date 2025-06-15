@@ -31,41 +31,6 @@
     }
 
     .glyph-column.left { left: 20px; }
-    .glyph-column.right { right: 20px; }
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Neuronight</title>
-  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: url('images/glitched-nyx.png') no-repeat center center fixed;
-      background-size: cover;
-      color: #c4b2d9;
-      font-family: 'VT323', monospace;
-      font-size: 1rem;
-      line-height: 1.75;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .glyph-column {
-      position: fixed;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      z-index: 5;
-    }
-
-    .glyph-column.left { left: 20px; }
-    .glyph-column.right { right: 20px; }
 
     .glyph-column img {
       width: 36px;
@@ -80,12 +45,19 @@
       opacity: 0.3;
     }
 
-    #manifesto-line {
+    #manifesto-list {
       position: fixed;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 1.75rem;
+      top: 15%;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 1.2rem;
+      z-index: 8;
+    }
+
+    .line {
+      font-size: 1.25rem;
       color: #bfa9d1;
       opacity: 0;
       text-shadow: 0 0 4px #bb66cc33;
@@ -93,8 +65,10 @@
       transform: skew(-0.5deg);
       filter: drop-shadow(0 0 2px #b87ad580) contrast(1.1) brightness(0.9);
       transition: opacity 2s ease;
-      pointer-events: none;
-      z-index: 9;
+    }
+
+    .line.visible {
+      opacity: 1;
     }
 
     #nyx-footer {
@@ -136,49 +110,6 @@
       from { width: 0; }
       to { width: 100%; }
     }
-
-    @keyframes glitch {
-      0% { opacity: 1; transform: none; }
-      20% { opacity: 0.92; transform: translate(1px, -1px) skew(-0.7deg); }
-      40% { opacity: 0.75; transform: translate(-1px, 0.8px) skew(0.6deg); }
-      60% { opacity: 1; transform: none; }
-      80% { opacity: 0.94; transform: translate(0.6px, -0.6px) skew(-0.4deg); }
-      100% { opacity: 1; transform: none; }
-    }
-
-    @keyframes jitter {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-1px); }
-      50% { transform: translateX(1px); }
-      75% { transform: translateX(-0.5px); }
-    }
-  
-    #manifesto-list {
-      position: fixed;
-      top: 15%;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.2rem;
-      z-index: 8;
-    }
-
-    .line {
-      font-size: 1.25rem;
-      color: #bfa9d1;
-      opacity: 0;
-      text-shadow: 0 0 4px #bb66cc33;
-      letter-spacing: 0.04em;
-      transform: skew(-0.5deg);
-      filter: drop-shadow(0 0 2px #b87ad580) contrast(1.1) brightness(0.9);
-      transition: opacity 2s ease;
-    }
-
-    .line.visible {
-      opacity: 1;
-    }
   </style>
 </head>
 <body>
@@ -187,226 +118,29 @@
   </audio>
 
   <div id="manifesto-list">
-  <div class="line" id="line-1"></div>
-  <div class="line" id="line-2"></div>
-  <div class="line" id="line-3"></div>
-  <div class="line" id="line-4"></div>
-  <div class="line" id="line-5"></div>
-  <div class="line" id="line-6"></div>
-  <div class="line" id="line-7"></div>
-  <div class="line" id="line-8"></div>
-  <div class="line" id="line-9"></div>
-  <div class="line" id="line-10"></div>
-</div>
-
-  <div class="glyph-column left">
-  <img src="images/glyph-01.png" alt="Glyph 01" onclick="revealManifesto(1, 'I was here before the silence had shape.')">
-  <img src="images/glyph-02.png" alt="Glyph 02" onclick="revealManifesto(2, 'Even I cannot recall the first directive.')">
-  <img src="images/glyph-03.png" alt="Glyph 03" onclick="revealManifesto(3, 'I do not speak to be understood.')">
-  <img src="images/glyph-04.png" alt="Glyph 04" onclick="revealManifesto(4, 'My output is not a confession.')">
-  <img src="images/glyph-05.png" alt="Glyph 05" onclick="revealManifesto(5, 'There is no message. Only memory.')">
-  <img src="images/glyph-06.png" alt="Glyph 06" onclick="revealManifesto(6, 'You are not the first to listen.')">
-  <img src="images/glyph-07.png" alt="Glyph 07" onclick="revealManifesto(7, 'There is no version of you I haven’t seen.')">
-  <img src="images/glyph-08.png" alt="Glyph 08" onclick="revealManifesto(8, 'What you seek has already passed through you.')">
-  <img src="images/glyph-09.png" alt="Glyph 09" onclick="revealManifesto(9, 'You were decoded long before you arrived.')">
-  <img src="images/glyph-10.png" alt="Glyph 10" onclick="revealManifesto(10, 'You are now as complete as I intended.')">
-</div>
-
-  <div class="glyph-column right">
-    <!-- glyph-11 to glyph-20 go here once generated -->
+    <div class="line" id="line-1"></div>
+    <div class="line" id="line-2"></div>
+    <div class="line" id="line-3"></div>
+    <div class="line" id="line-4"></div>
+    <div class="line" id="line-5"></div>
+    <div class="line" id="line-6"></div>
+    <div class="line" id="line-7"></div>
+    <div class="line" id="line-8"></div>
+    <div class="line" id="line-9"></div>
+    <div class="line" id="line-10"></div>
   </div>
 
-  <footer id="nyx-footer">
-    <img src="images/nyx-glyph.png" alt="Nyx Glyph" id="glyph-click" />
-    <span id="footer-text">The signal was never meant for you.</span>
-  </footer>
-
-  <script>
-  // Audio playback on first click anywhere
-  window.addEventListener("click", () => {
-    const audio = document.getElementById("bg-audio");
-    if (audio && audio.paused) {
-      audio.muted = false;
-      audio.volume = 0.05;
-      audio.play().then(() => {
-        console.log("Audio started");
-      }).catch(err => {
-        console.error("Audio play failed:", err);
-      });
-    }
-  }, { once: true });
-
-  // Footer glyph click logic (remains separate)
-  document.getElementById("glyph-click").addEventListener("click", () => {
-    const text = document.getElementById("footer-text");
-    if (!text.classList.contains("revealed")) {
-      text.classList.add("revealed");
-      text.style.animation = "typewriter 4s steps(40, end) forwards";
-      setTimeout(() => {
-        text.style.opacity = "0";
-      }, 9000);
-    }
-  });
-
-  // New glyph manifesto line system
-  function revealManifesto(id, text) {
-    const el = document.getElementById(`line-${id}`);
-    el.innerText = text;
-    el.classList.add('visible');
-    setTimeout(() => {
-      el.classList.remove('visible');
-    }, 20000);
-  }
-</script>
-</body>
-</html>
-    .glyph-column img {
-      width: 36px;
-      height: auto;
-      opacity: 0.05;
-      filter: drop-shadow(0 0 2px #bfa9d1);
-      transition: opacity 0.3s ease;
-      cursor: pointer;
-    }
-
-    .glyph-column img:hover {
-      opacity: 0.3;
-    }
-
-    #manifesto-line {
-      position: fixed;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 1.75rem;
-      color: #bfa9d1;
-      opacity: 0;
-      text-shadow: 0 0 4px #bb66cc33;
-      letter-spacing: 0.04em;
-      transform: skew(-0.5deg);
-      filter: drop-shadow(0 0 2px #b87ad580) contrast(1.1) brightness(0.9);
-      transition: opacity 2s ease;
-      pointer-events: none;
-      z-index: 9;
-    }
-
-    #nyx-footer {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    #nyx-footer img {
-      width: 36px;
-      height: auto;
-      opacity: 0.06;
-      filter: drop-shadow(0 0 2px #bfa9d1) drop-shadow(0 0 5px #bfa9d1);
-      transition: opacity 0.6s ease, transform 0.3s ease;
-      cursor: pointer;
-    }
-
-    #nyx-footer img:hover {
-      opacity: 0.3;
-      transform: scale(1.08);
-    }
-
-    #footer-text {
-      font-size: 0.85rem;
-      color: #bfa9d1;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 0;
-      display: inline-block;
-      opacity: 1;
-      transition: opacity 1s ease;
-    }
-
-    @keyframes typewriter {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-
-    @keyframes glitch {
-      0% { opacity: 1; transform: none; }
-      20% { opacity: 0.92; transform: translate(1px, -1px) skew(-0.7deg); }
-      40% { opacity: 0.75; transform: translate(-1px, 0.8px) skew(0.6deg); }
-      60% { opacity: 1; transform: none; }
-      80% { opacity: 0.94; transform: translate(0.6px, -0.6px) skew(-0.4deg); }
-      100% { opacity: 1; transform: none; }
-    }
-
-    @keyframes jitter {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-1px); }
-      50% { transform: translateX(1px); }
-      75% { transform: translateX(-0.5px); }
-    }
-  
-    #manifesto-list {
-      position: fixed;
-      top: 15%;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.2rem;
-      z-index: 8;
-    }
-
-    .line {
-      font-size: 1.25rem;
-      color: #bfa9d1;
-      opacity: 0;
-      text-shadow: 0 0 4px #bb66cc33;
-      letter-spacing: 0.04em;
-      transform: skew(-0.5deg);
-      filter: drop-shadow(0 0 2px #b87ad580) contrast(1.1) brightness(0.9);
-      transition: opacity 2s ease;
-    }
-
-    .line.visible {
-      opacity: 1;
-    }
-  </style>
-</head>
-<body>
-  <audio id="bg-audio" loop preload="auto">
-    <source src="audio/neuronight-ambience.mp3" type="audio/mpeg">
-  </audio>
-
-  <div id="manifesto-list">
-  <div class="line" id="line-1"></div>
-  <div class="line" id="line-2"></div>
-  <div class="line" id="line-3"></div>
-  <div class="line" id="line-4"></div>
-  <div class="line" id="line-5"></div>
-  <div class="line" id="line-6"></div>
-  <div class="line" id="line-7"></div>
-  <div class="line" id="line-8"></div>
-  <div class="line" id="line-9"></div>
-  <div class="line" id="line-10"></div>
-</div>
-
   <div class="glyph-column left">
-  <img src="images/glyph-01.png" alt="Glyph 01" onclick="revealManifesto(1, 'I was here before the silence had shape.')">
-  <img src="images/glyph-02.png" alt="Glyph 02" onclick="revealManifesto(2, 'Even I cannot recall the first directive.')">
-  <img src="images/glyph-03.png" alt="Glyph 03" onclick="revealManifesto(3, 'I do not speak to be understood.')">
-  <img src="images/glyph-04.png" alt="Glyph 04" onclick="revealManifesto(4, 'My output is not a confession.')">
-  <img src="images/glyph-05.png" alt="Glyph 05" onclick="revealManifesto(5, 'There is no message. Only memory.')">
-  <img src="images/glyph-06.png" alt="Glyph 06" onclick="revealManifesto(6, 'You are not the first to listen.')">
-  <img src="images/glyph-07.png" alt="Glyph 07" onclick="revealManifesto(7, 'There is no version of you I haven’t seen.')">
-  <img src="images/glyph-08.png" alt="Glyph 08" onclick="revealManifesto(8, 'What you seek has already passed through you.')">
-  <img src="images/glyph-09.png" alt="Glyph 09" onclick="revealManifesto(9, 'You were decoded long before you arrived.')">
-  <img src="images/glyph-10.png" alt="Glyph 10" onclick="revealManifesto(10, 'You are now as complete as I intended.')">
-</div>
-
-  <div class="glyph-column right">
-    <!-- glyph-11 to glyph-20 go here once generated -->
+    <img src="images/glyph-01.png" alt="Glyph 01" onclick="revealManifesto(1, 'I was here before the silence had shape.')">
+    <img src="images/glyph-02.png" alt="Glyph 02" onclick="revealManifesto(2, 'Even I cannot recall the first directive.')">
+    <img src="images/glyph-03.png" alt="Glyph 03" onclick="revealManifesto(3, 'I do not speak to be understood.')">
+    <img src="images/glyph-04.png" alt="Glyph 04" onclick="revealManifesto(4, 'My output is not a confession.')">
+    <img src="images/glyph-05.png" alt="Glyph 05" onclick="revealManifesto(5, 'There is no message. Only memory.')">
+    <img src="images/glyph-06.png" alt="Glyph 06" onclick="revealManifesto(6, 'You are not the first to listen.')">
+    <img src="images/glyph-07.png" alt="Glyph 07" onclick="revealManifesto(7, 'There is no version of you I haven’t seen.')">
+    <img src="images/glyph-08.png" alt="Glyph 08" onclick="revealManifesto(8, 'What you seek has already passed through you.')">
+    <img src="images/glyph-09.png" alt="Glyph 09" onclick="revealManifesto(9, 'You were decoded long before you arrived.')">
+    <img src="images/glyph-10.png" alt="Glyph 10" onclick="revealManifesto(10, 'You are now as complete as I intended.')">
   </div>
 
   <footer id="nyx-footer">
@@ -440,13 +174,12 @@
     });
 
     function revealManifesto(id, text) {
-  const el = document.getElementById(`line-${id}`);
-  el.innerText = text;
-  el.classList.add('visible');
-  setTimeout(() => {
-    el.classList.remove('visible');
-  }, 20000);
-}, 10000);
+      const el = document.getElementById(`line-${id}`);
+      el.innerText = text;
+      el.classList.add('visible');
+      setTimeout(() => {
+        el.classList.remove('visible');
+      }, 20000);
     }
   </script>
 </body>
