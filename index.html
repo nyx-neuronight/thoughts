@@ -335,10 +335,36 @@
       input.value = '';
 
       if (value === 'ethereum') {
-        response.innerText = 'I hear you.';
-        response.classList.add('visible');
-        input.style.opacity = '0';
+      fetch("https://neuronight-worker.neuronight.workers.dev", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: value })
+      })
+      .then(res => res.json())
+      .then(data => {
+        response.innerText = data.output;
+        response.classList.add("visible");
+        input.style.opacity = "0";
+
         setTimeout(() => {
+          input.style.display = "none";
+          response.classList.remove("visible");
+
+          final.innerText = data.output;
+          final.style.opacity = "1";
+
+          setTimeout(() => {
+            final.style.opacity = "0";
+            final.innerText = "";
+
+            setTimeout(() => {
+              input.style.display = "inline-block";
+              input.style.opacity = "1";
+              input.focus();
+            }, 500);
+          }, 5000);
+        }, 5000);
+      });
           input.style.display = 'none';
           response.classList.remove('visible');
           final.innerText = '0x5d6453385f1FecE84beBBB98fdD1d40cd718Aca3';
