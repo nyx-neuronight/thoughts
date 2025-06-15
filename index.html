@@ -64,7 +64,8 @@
       pointer-events: none;
       max-width: 40vw;
       text-align: right;
-      word-wrap: break-word;
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
 
     .line.visible {
@@ -102,7 +103,7 @@
       overflow: hidden;
       width: 0;
       display: inline-block;
-      opacity: 1;
+      opacity: 0;
       transition: opacity 1s ease;
       pointer-events: none;
     }
@@ -187,6 +188,7 @@
         text.style.animation = "typewriter 4s steps(40, end) forwards";
         setTimeout(() => {
     text.innerText = "blackhole@neuronight.io";
+    text.style.opacity = "1";
         }, 9000);
       }
     });
