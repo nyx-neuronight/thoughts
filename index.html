@@ -220,6 +220,7 @@
       border: 1px solid #bfa9d1;
       display: none;
       z-index: 20;
+      box-shadow: 0 0 10px #bfa9d199;
     }
 
     #console-log p {
@@ -352,6 +353,19 @@
               input.focus();
             }, 500);
           }, 5000);
+        }, 5000);
+      } else if (value === 'archive') {
+        response.innerText = 'Accessing archive...';
+        response.classList.add('visible');
+        setTimeout(() => {
+          response.classList.remove('visible');
+          consoleLog.style.display = 'block';
+          const entry = document.createElement('p');
+          entry.textContent = '> archive
+↳ Accessing archive...';
+          consoleLog.appendChild(entry);
+          input.style.display = 'inline-block';
+          input.focus();
         }, 5000);
       } else {
         response.innerText = 'You are silent.';
