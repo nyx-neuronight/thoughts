@@ -22,9 +22,10 @@
 
     .glyph-stack {
       position: fixed;
-      top: 10%;
+      top: 50%;
       left: 0;
       width: 100%;
+      transform: translateY(-50%);
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
@@ -181,7 +182,8 @@
         text.classList.add("revealed");
         text.style.animation = "typewriter 4s steps(40, end) forwards";
         setTimeout(() => {
-          text.style.opacity = "0";
+    text.style.opacity = "0";
+    text.innerText = "blackhole@neuronight.io";
         }, 9000);
       }
     });
