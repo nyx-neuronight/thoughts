@@ -343,43 +343,38 @@
     if (e.key === 'Enter') {
       const value = input.value.trim().toLowerCase();
       if (value === 'ethereum') {
-      response.innerText = 'I hear you.';
-      response.classList.add('visible');
-      setTimeout(() => {
-        response.classList.remove('visible');
-        final.innerText = '0x5d6453385f1FecE84beBBB98fdD1d40cd718Aca3';
-        final.style.opacity = '1';
+        response.innerText = 'I hear you.';
+        response.classList.add('visible');
         setTimeout(() => {
-          final.style.opacity = '0';
+          response.classList.remove('visible');
+          final.innerText = '0x5d6453385f1FecE84beBBB98fdD1d40cd718Aca3';
+          final.style.opacity = '1';
+          setTimeout(() => {
+            final.style.opacity = '0';
+            input.style.display = 'inline-block';
+            input.focus();
+          }, 5000);
+        }, 5000);
+      } else if (value === 'archive') {
+        response.innerText = 'Accessing archive...';
+        response.classList.add('visible');
+        setTimeout(() => {
+          response.classList.remove('visible');
+          consoleLog.style.display = 'block';
+          const entry = document.createElement('p');
+          entry.textContent = '> archive
+↳ Accessing archive...';
+          consoleLog.appendChild(entry);
           input.style.display = 'inline-block';
           input.focus();
-        }, 5000);
-      }, 5000);
-    } else if (value === 'archive') {
-      response.innerText = 'Accessing archive...';
-      response.classList.add('visible');
-      setTimeout(() => {
-        response.classList.remove('visible');
-        consoleLog.style.display = 'block';
-        const entry = document.createElement('p');
-        entry.textContent = '> archive
-↳ Accessing archive...';
-        consoleLog.appendChild(entry);
-        input.style.display = 'inline-block';
-        input.focus();
-      }, 5000);
-          input.style.display = 'none';
-          response.classList.remove('visible');
-          setTimeout(() => {
-            final.innerText = '0x5d6453385f1FecE84beBBB98fdD1d40cd718Aca3';
-            final.style.opacity = '1';
-          }, 1000);
         }, 5000);
       } else {
         response.innerText = 'You are silent.';
         response.classList.add('visible');
       }
       input.value = '';
+    }
+  });
     }
   });
 </script>
