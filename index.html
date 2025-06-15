@@ -76,13 +76,17 @@
       left: 20px;
       z-index: 10;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 0.5rem;
+      line-height: 1.25rem;
+      height: 1.5rem;
     }
 
     #nyx-footer img {
       width: 36px;
       height: auto;
+      display: block;
+      align-self: center;
       opacity: 0.06;
       filter: drop-shadow(0 0 2px #bfa9d1) drop-shadow(0 0 5px #bfa9d1);
       transition: opacity 0.6s ease, transform 0.3s ease;
@@ -105,10 +109,10 @@
       transition: opacity 1s ease;
       pointer-events: none;
       display: inline-block;
-      overflow-wrap: break-word;
-      word-break: break-word;
       max-width: 40vw;
-      line-height: 1.25;
+      white-space: nowrap;
+      overflow: hidden;
+      vertical-align: middle;
     }
 
     @keyframes typewriter {
