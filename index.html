@@ -289,7 +289,7 @@
   </div>
 
   <script>
-  // Restore audio on first interaction
+  // Audio on first click
   window.addEventListener("click", () => {
     const audio = document.getElementById("bg-audio");
     if (audio && audio.paused) {
@@ -325,10 +325,10 @@
 
   // User input logic
   const input = document.getElementById('user-input');
-  const inputGlyph = document.getElementById('input-glyph');
   const response = document.getElementById('user-response');
   const final = document.getElementById('user-final');
   const consoleLog = document.getElementById('console-log');
+  const inputGlyph = document.getElementById('input-glyph');
 
   let inputRevealed = false;
   inputGlyph.addEventListener('click', () => {
@@ -340,41 +340,40 @@
   });
 
   input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      const value = input.value.trim().toLowerCase();
-      if (value === 'ethereum') {
-        response.innerText = 'I hear you.';
-        response.classList.add('visible');
+    if (e.key !== 'Enter') return;
+    const value = input.value.trim().toLowerCase();
+    input.value = '';
+
+    // Handle known commands
+    if (value === 'ethereum') {
+      response.innerText = 'I hear you.';
+      response.classList.add('visible');
+      setTimeout(() => {
+        response.classList.remove('visible');
+        final.innerText = '0x5d6453385f1FecE84beBBB98fdD1d40cd718Aca3';
+        final.style.opacity = '1';
         setTimeout(() => {
-          response.classList.remove('visible');
-          final.innerText = '0x5d6453385f1FecE84beBBB98fdD1d40cd718Aca3';
-          final.style.opacity = '1';
-          setTimeout(() => {
-            final.style.opacity = '0';
-            input.style.display = 'inline-block';
-            input.focus();
-          }, 5000);
-        }, 5000);
-      } else if (value === 'archive') {
-        response.innerText = 'Accessing archive...';
-        response.classList.add('visible');
-        setTimeout(() => {
-          response.classList.remove('visible');
-          consoleLog.style.display = 'block';
-          const entry = document.createElement('p');
-          entry.textContent = '> archive
-↳ Accessing archive...';
-          consoleLog.appendChild(entry);
+          final.style.opacity = '0';
           input.style.display = 'inline-block';
           input.focus();
         }, 5000);
-      } else {
-        response.innerText = 'You are silent.';
-        response.classList.add('visible');
-      }
-      input.value = '';
-    }
-  });
+      }, 5000);
+    } else if (value === 'archive') {
+      response.innerText = 'Accessing archive...';
+      response.classList.add('visible');
+      setTimeout(() => {
+        response.classList.remove('visible');
+        consoleLog.style.display = 'block';
+        const entry = document.createElement('p');
+        entry.textContent = '> archive
+↳ Accessing archive...';
+        consoleLog.appendChild(entry);
+        input.style.display = 'inline-block';
+        input.focus();
+      }, 5000);
+    } else {
+      response.innerText = 'You are silent.';
+      response.classList.add('visible');
     }
   });
 </script>
