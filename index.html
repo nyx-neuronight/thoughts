@@ -356,43 +356,30 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: value })
       })
-        .then(res => res.json())
-        .then(data => {
-          const output = data.output || 'No signal.';
-          input.style.opacity = "0";
-          input.style.display = "none";
+      .then(async res => {
+        const data = await res.json();
+        const output = data.output || 'No response received.';
 
-          final.innerText = output;
-          final.style.opacity = "1";
+        input.style.opacity = "0";
+        input.style.display = "none";
 
+        final.innerText = output;
+        final.style.opacity = "1";
+
+        setTimeout(() => {
+          final.style.opacity = "0";
+          final.innerText = "";
           setTimeout(() => {
-            final.style.opacity = "0";
-            final.innerText = "";
-            setTimeout(() => {
-              input.style.display = "inline-block";
-              input.style.opacity = "1";
-              input.focus();
-            }, 500);
-          }, 5000);
-        })
-        .catch(() => {
-          const fallback = 'You are silent.';
-          input.style.opacity = "0";
-          input.style.display = "none";
-
-          final.innerText = fallback;
-          final.style.opacity = "1";
-
-          setTimeout(() => {
-            final.style.opacity = "0";
-            final.innerText = "";
-            setTimeout(() => {
-              input.style.display = "inline-block";
-              input.style.opacity = "1";
-              input.focus();
-            }, 500);
-          }, 5000);
-        });
+            input.style.display = "inline-block";
+            input.style.opacity = "1";
+            input.focus();
+          }, 500);
+        }, 5000);
+      })
+      .catch(err => {
+        final.innerText = `Frontend error: ${err.message}`;
+        final.style.opacity = "1";
+      });
     });
 
     window.addEventListener("click", () => {
