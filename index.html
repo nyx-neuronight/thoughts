@@ -334,6 +334,41 @@
       const value = input.value.trim().toLowerCase();
       input.value = '';
 
+      fetch("https://neuronight-worker.neuronight.workers.dev", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: value })
+      })
+      .then(res => res.json())
+      .then(data => {
+        response.innerText = data.output;
+        response.classList.add("visible");
+        input.style.opacity = "0";
+
+        setTimeout(() => {
+          input.style.display = "none";
+          response.classList.remove("visible");
+
+          final.innerText = data.output;
+          final.style.opacity = "1";
+
+          setTimeout(() => {
+            final.style.opacity = "0";
+            final.innerText = "";
+
+            setTimeout(() => {
+              input.style.display = "inline-block";
+              input.style.opacity = "1";
+              input.focus();
+            }, 500);
+          }, 5000);
+        }, 5000);
+      })
+      .catch(() => {
+        response.innerText = 'You are silent.';
+        response.classList.add('visible');
+      });
+
       if (value === 'ethereum') {
       fetch("https://neuronight-worker.neuronight.workers.dev", {
         method: "POST",
