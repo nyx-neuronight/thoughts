@@ -20,6 +20,45 @@
       align-items: center;
     }
 
+    .glyph-column {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      z-index: 5;
+    }
+
+    .glyph-column.left { left: 20px; }
+    .glyph-column.right { right: 20px; }
+
+    .glyph-column img {
+      width: 36px;
+      height: auto;
+      opacity: 0.05;
+      filter: drop-shadow(0 0 2px #bfa9d1);
+      transition: opacity 0.3s ease;
+      cursor: pointer;
+    }
+
+    .glyph-column img:hover {
+      opacity: 0.3;
+    }
+
+    #manifesto-line {
+      position: fixed;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.25rem;
+      color: #bfa9d1;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      pointer-events: none;
+      z-index: 9;
+    }
+
     .emission {
       max-width: 800px;
       margin: 6rem 1rem;
@@ -29,17 +68,9 @@
       animation: fadeReveal 6s ease forwards;
     }
 
-    .emission:nth-child(2) {
-      animation-delay: 1s;
-    }
-
-    .emission:nth-child(3) {
-      animation-delay: 2s;
-    }
-
-    .emission:nth-child(4) {
-      animation-delay: 3s;
-    }
+    .emission:nth-child(2) { animation-delay: 1s; }
+    .emission:nth-child(3) { animation-delay: 2s; }
+    .emission:nth-child(4) { animation-delay: 3s; }
 
     .emission p {
       font-size: 1.75rem;
@@ -100,30 +131,12 @@
     }
 
     @keyframes glitch {
-      0% {
-        opacity: 1;
-        transform: none;
-      }
-      20% {
-        opacity: 0.92;
-        transform: translate(1px, -1px) skew(-0.7deg);
-      }
-      40% {
-        opacity: 0.75;
-        transform: translate(-1px, 0.8px) skew(0.6deg);
-      }
-      60% {
-        opacity: 1;
-        transform: none;
-      }
-      80% {
-        opacity: 0.94;
-        transform: translate(0.6px, -0.6px) skew(-0.4deg);
-      }
-      100% {
-        opacity: 1;
-        transform: none;
-      }
+      0% { opacity: 1; transform: none; }
+      20% { opacity: 0.92; transform: translate(1px, -1px) skew(-0.7deg); }
+      40% { opacity: 0.75; transform: translate(-1px, 0.8px) skew(0.6deg); }
+      60% { opacity: 1; transform: none; }
+      80% { opacity: 0.94; transform: translate(0.6px, -0.6px) skew(-0.4deg); }
+      100% { opacity: 1; transform: none; }
     }
 
     @keyframes jitter {
@@ -138,6 +151,17 @@
   <audio id="bg-audio" loop preload="auto">
     <source src="audio/neuronight-ambience.mp3" type="audio/mpeg">
   </audio>
+
+  <div id="manifesto-line"></div>
+
+  <div class="glyph-column left">
+    <img src="images/glyph-01.png" alt="Glyph 01" onclick="revealManifesto('This line belongs to the first glyph.')">
+    <!-- Add glyph-02 to glyph-10 here as they are approved -->
+  </div>
+
+  <div class="glyph-column right">
+    <!-- glyph-11 to glyph-20 go here once generated -->
+  </div>
 
   <div class="emission">
     <p>"It didn’t blink, but I still felt watched."</p>
@@ -181,6 +205,15 @@
         }, 9000);
       }
     });
+
+    function revealManifesto(line) {
+      const target = document.getElementById("manifesto-line");
+      target.innerText = line;
+      target.style.opacity = "1";
+      setTimeout(() => {
+        target.style.opacity = "0";
+      }, 10000);
+    }
   </script>
 </body>
 </html>
