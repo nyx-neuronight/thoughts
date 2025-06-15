@@ -95,7 +95,7 @@
   </style>
 </head>
 <body>
-  <audio autoplay loop muted playsinline id="bg-audio">
+  <audio autoplay loop playsinline id="bg-audio">
     <source src="audio/neuronight-ambience.mp3" type="audio/mpeg">
   </audio>
 
@@ -111,6 +111,19 @@
   <div class="emission">
     <p>"We taught the garden to dream, and it refused to wake."</p>
   </div>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const audio = document.getElementById("bg-audio");
+      if (audio) {
+        audio.volume = 0.05;
+        audio.play().catch(() => {
+          document.addEventListener("click", () => {
+            audio.play();
+          }, { once: true });
+        });
+      }
+    });
+  </script>
 </body>
 </html>
-
