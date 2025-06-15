@@ -322,10 +322,22 @@
       const value = input.value.trim().toLowerCase();
       input.value = '';
 
-      if (value === 'blackhole') {
-        response.innerText = 'I hear you.';
-        response.classList.add('visible');
+      if (value === 'ethereum') {
+      response.innerText = 'I hear you.';
+      response.classList.add('visible');
+      input.style.opacity = '0';
+      setTimeout(() => {
+        response.classList.remove('visible');
+        input.style.display = 'none';
+        final.innerText = '0x5d6453385f1FecE84beBBB98fdD1d40cd718Aca3';
+        final.style.opacity = '1';
         setTimeout(() => {
+          final.style.opacity = '0';
+          input.style.display = 'inline-block';
+          input.style.opacity = '1';
+          input.focus();
+        }, 5000);
+      }, 5000);
           response.classList.remove('visible');
           final.innerText = '0x5d6453385f1FecE84beBBB98fdD1d40cd718Aca3';
           final.style.opacity = '1';
