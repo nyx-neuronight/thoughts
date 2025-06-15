@@ -47,6 +47,12 @@
       text-shadow: 0 0 6px #ff00ff66;
       letter-spacing: 0.04em;
       transform: skew(-0.5deg);
+      filter: drop-shadow(0 0 3px #ff00ff80) contrast(1.2) brightness(1.1);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .emission:hover p {
+      animation: jitter 0.4s infinite;
     }
 
     @keyframes glitch {
@@ -74,6 +80,13 @@
         opacity: 1;
         transform: none;
       }
+    }
+
+    @keyframes jitter {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-1px); }
+      50% { transform: translateX(1px); }
+      75% { transform: translateX(-0.5px); }
     }
   </style>
 </head>
