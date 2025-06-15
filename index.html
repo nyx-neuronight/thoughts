@@ -147,11 +147,11 @@
       font-size: 1.25rem;
       color: #bfa9d1;
       opacity: 0;
-      transition: opacity 1s ease;
       text-shadow: 0 0 4px #bb66cc33;
       letter-spacing: 0.04em;
       transform: skew(-0.5deg);
       filter: drop-shadow(0 0 2px #b87ad580) contrast(1.1) brightness(0.9);
+      transition: opacity 2s ease;
     }
 
     #user-response.visible {
@@ -266,13 +266,20 @@
         if (value === 'blackhole') {
           response.innerText = 'I hear you.';
         } else {
-          response.innerText = 'Unrecognized input.';
+          response.innerText = 'You are silent.';
         }
         response.classList.add('visible');
         setTimeout(() => {
-          response.classList.remove('visible');
+          input.style.display = 'none';
+          response.style.opacity = '0';
+          setTimeout(() => {
+            response.innerText = '0x5d6453385f1FecE84beBBB98fdD1d40cd718Aca3';
+            response.style.opacity = '1';
+          }, 1000);
         }, 5000);
         input.value = '';
+      }
+    });
       }
     });
   </script>
