@@ -25,19 +25,20 @@
       margin: 6rem 1rem;
       text-align: center;
       padding: 2rem;
-      animation: glitch 2.3s infinite;
+      opacity: 0;
+      animation: fadeReveal 6s ease forwards;
     }
 
     .emission:nth-child(2) {
-      animation-duration: 3.1s;
+      animation-delay: 1s;
     }
 
     .emission:nth-child(3) {
-      animation-duration: 2.7s;
+      animation-delay: 2s;
     }
 
     .emission:nth-child(4) {
-      animation-duration: 3.4s;
+      animation-delay: 3s;
     }
 
     .emission p {
@@ -51,8 +52,11 @@
       transition: transform 0.2s ease-in-out;
     }
 
-    .emission:hover p {
-      animation: jitter 0.4s infinite;
+    @keyframes fadeReveal {
+      0% { opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; }
     }
 
     #nyx-footer {
@@ -174,7 +178,7 @@
         text.style.animation = "typewriter 4s steps(40, end) forwards";
         setTimeout(() => {
           text.style.opacity = "0";
-        }, 9000); // waits for typing (4s) + delay (5s)
+        }, 9000);
       }
     });
   </script>
