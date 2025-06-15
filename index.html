@@ -55,26 +55,24 @@
       animation: jitter 0.4s infinite;
     }
 
-    footer {
+    #nyx-footer {
       position: fixed;
       bottom: 20px;
       left: 20px;
-      font-size: 1.2rem;
-      color: #bfa9d1;
-      letter-spacing: 0.2em;
-      z-index: 5;
-      animation: flicker 15s infinite;
+      z-index: 10;
     }
 
-    @keyframes flicker {
-      0%, 98%, 100% {
-        opacity: 0.04;
-        transform: none;
-      }
-      99% {
-        opacity: 0.2;
-        transform: scale(1.03);
-      }
+    #nyx-footer img {
+      width: 36px;
+      height: auto;
+      opacity: 0.06;
+      filter: drop-shadow(0 0 2px #bfa9d1) drop-shadow(0 0 5px #bfa9d1);
+      transition: opacity 0.6s ease, transform 0.3s ease;
+    }
+
+    #nyx-footer img:hover {
+      opacity: 0.3;
+      transform: scale(1.08);
     }
 
     @keyframes glitch {
@@ -130,7 +128,9 @@
     <p>"We taught the garden to dream, and it refused to wake."</p>
   </div>
 
-  <footer>∴</footer>
+  <footer id="nyx-footer">
+    <img src="images/nyx-glyph.png" alt="Nyx Glyph" />
+  </footer>
 
   <script>
     window.addEventListener("click", () => {
