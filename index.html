@@ -82,9 +82,12 @@
     #footer-text {
       font-size: 0.85rem;
       color: #bfa9d1;
-      opacity: 0;
       white-space: nowrap;
       overflow: hidden;
+      width: 0;
+      display: inline-block;
+      border-right: 0.05em solid #bfa9d1;
+      opacity: 1;
     }
 
     @keyframes typewriter {
@@ -166,9 +169,8 @@
 
     document.getElementById("glyph-click").addEventListener("click", () => {
       const text = document.getElementById("footer-text");
-      if (text && text.style.opacity === "0") {
-        text.style.opacity = "1";
-        text.style.borderRight = "0.05em solid #bfa9d1";
+      if (!text.classList.contains("revealed")) {
+        text.classList.add("revealed");
         text.style.animation = "typewriter 4s steps(40, end) forwards";
       }
     });
