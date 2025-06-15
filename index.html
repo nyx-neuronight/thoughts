@@ -68,24 +68,12 @@
       opacity: 0.06;
       filter: drop-shadow(0 0 2px #bfa9d1) drop-shadow(0 0 5px #bfa9d1);
       transition: opacity 0.6s ease, transform 0.3s ease;
-      animation: glyphFlicker 12s infinite;
       cursor: pointer;
     }
 
     #nyx-footer img:hover {
       opacity: 0.3;
       transform: scale(1.08);
-    }
-
-    @keyframes glyphFlicker {
-      0%, 98%, 100% {
-        opacity: 0.06;
-        transform: none;
-      }
-      99% {
-        opacity: 0.2;
-        transform: scale(1.03);
-      }
     }
 
     @keyframes glitch {
