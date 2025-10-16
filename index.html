@@ -4,21 +4,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>neuronight.io — coming soon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    html,body{height:100%;margin:0;background:#000;color:#e5e5e5;font-family:'Inter',system-ui,sans-serif;overflow:hidden;}
+    html,body{height:100%;margin:0;background:#000;color:#d9f9f6;font-family:'Orbitron',sans-serif;overflow:hidden;}
     body{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;}
     canvas#noise{position:fixed;inset:0;z-index:0;opacity:0.07;}
-    .logo{font-size:2.5rem;letter-spacing:2px;text-transform:uppercase;position:relative;z-index:1;animation:glitch 3s infinite linear alternate;}
-    .tagline{font-size:1rem;opacity:0.8;z-index:1;animation:fade 6s infinite ease-in-out alternate;text-align:center;}
-    .cursor{font-family:monospace;color:#5eead4;font-size:1.2rem;animation:blink 1s infinite;position:absolute;bottom:40px;}
+    .logo{font-size:2.8rem;letter-spacing:3px;text-transform:uppercase;position:relative;z-index:1;color:#5eead4;text-shadow:0 0 12px #5eead4,0 0 32px #2dd4bf;animation:glowShift 4s infinite alternate ease-in-out;}
+    .tagline{font-size:1rem;opacity:0.8;z-index:1;animation:fade 6s infinite ease-in-out alternate;text-align:center;color:#baf8f3;}
+    .cursor{font-family:monospace;color:#5eead4;font-size:1.2rem;animation:blink 1s infinite,glowShift 4s infinite alternate ease-in-out;position:absolute;bottom:40px;}
 
     @keyframes blink{50%{opacity:0;}}
     @keyframes fade{0%,100%{opacity:0.2;}50%{opacity:1;}}
-    @keyframes glitch{
-      0%{text-shadow:1px 0 red,-1px 0 cyan;}
-      50%{text-shadow:2px 0 cyan,-2px 0 red;}
-      100%{text-shadow:1px 0 red,-1px 0 cyan;}
-    }
+    @keyframes glowShift{0%{text-shadow:0 0 6px #14b8a6,0 0 16px #14b8a6;}100%{text-shadow:0 0 16px #5eead4,0 0 36px #2dd4bf;}}
   </style>
 </head>
 <body>
@@ -27,7 +24,6 @@
   <div class="tagline">nothing trickles down faster than irony</div>
   <div class="cursor">>_</div>
   <script>
-    // Noise background generator
     const canvas = document.getElementById('noise');
     const ctx = canvas.getContext('2d');
     let w,h,imageData,buffer,len;
@@ -40,4 +36,3 @@
   </script>
 </body>
 </html>
-
