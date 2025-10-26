@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>nyx — neuronight</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --mag1: #e63be4;
+      --mag2: #b832b7;
+      --mag3: #f472f8;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #000;
+      color: var(--mag1);
+      font-family: 'Orbitron', sans-serif;
+      overflow: hidden;
+    }
+
+    /* layout */
+    .stage {
+      position: fixed;
+      inset: 0;
+      background: #000;
+    }
+    .bg {
+      position: absolute;
+      inset: 0;
+      background: url('/images/nyx_rooftop.png') center/cover no-repeat;
+      filter: brightness(0.8) contrast(1.05);
+      transform-origin: center;
+    }
+    .vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(70% 60% at 50% 40%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 55%, rgba(0,0,0,0.75) 100%);
+      pointer-events: none;
+    }
+    .grain {
+      position: absolute;
+      inset: 0;
+      opacity: 0.08;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    /* text */
+    .lore {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--mag1);
+      text-shadow: 0 0 12px var(--mag1), 0 0 32px var(--mag2);
+      font-size: 1rem;
+      opacity: 0.9;
+      animation: pulse 4s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.85; text-shadow: 0 0 12px var(--mag1), 0 0 24px var(--mag2); }
+      50% { opacity: 1; text-shadow: 0 0 18px var(--mag1), 0 0 36px var(--mag3); }
+    }
+
+    /* scanlines */
+    .scan {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      opacity: 0;
+    }
+    .bar {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(246,114,248,0), rgba(230,59,228,0.6), rgba(246,114,248,0));
+    }
+
+    /* back link */
+    a.back {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      color: var(--mag1);
+      text-decoration: none;
+      font-size: 0.9rem;
+      opacity: 0.6;
+      transition: opacity 0.3s;
+    }
+    a.back:hover {
+      opacity: 1;
+      text-shadow: 0 0 10px var(--mag1);
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="bg" id="bg"></div>
+    <div class="vignette"></div>
+    <canvas class="grain" id="grain"></canvas>
+    <div class="lore" id="lore">the night remembers everything</div>
+    <div class="scan" id="scan">
+      <div class="bar" style="top: 30%;"></div>
+      <div class="bar" style="top: 55%;"></div>
+      <div class="bar" style="top: 80%;"></div>
+    </div>
+    <a href="index.html" class="back">←</a>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    // subtle camera drift
+    gsap.to("#bg", {
+      scale: 1.05,
+      x: "2%",
+      y: "-1%",
+      duration: 16,
+      yoyo: true,
+      repeat: -1,
+      ease: "sine.inOut"
+    });
+
+    // scanline flicker
+    const scan = document.getElementById("scan");
+    function pulse() {
+      const tl = gsap.timeline();
+      tl.set(scan, { opacity: 0 });
+      tl.to(scan, { opacity: 0.3, duration: 0.1 });
+      tl.to(scan, { opacity: 0, duration: 0.2 });
+      tl.to("#lore", {
+        filter: "contrast(140%) brightness(120%)",
+        duration: 0.08,
+        yoyo: true,
+        repeat: 1
+      }, 0);
+    }
+    setInterval(pulse, 3500);
+
+    // static / grain effect
+    const g = document.getElementById("grain");
+    const gx = g.getContext("2d");
+    let W, H, im, dat, len;
+    function size() {
+      g.width = W = innerWidth;
+      g.height = H = innerHeight;
+      im = gx.createImageData(W, H);
+      dat = im.data;
+      len = dat.length;
+    }
+    size();
+    addEventListener("resize", size);
+    (function loop() {
+      for (let i = 0; i < len; i += 4) {
+        const c = Math.random() * 255;
+        dat[i] = dat[i + 1] = dat[i + 2] = c;
+        dat[i + 3] = 255;
+      }
+      gx.putImageData(im, 0, 0);
+      requestAnimationFrame(loop);
+    })();
+  </script>
+</body>
+</html>
