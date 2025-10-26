@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>neuronight.io</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    html,body{height:100%;margin:0;background:#000;color:#f5d9f9;font-family:'Orbitron',sans-serif;overflow:hidden;}
-    body{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;}
-    canvas#noise{position:fixed;inset:0;z-index:0;opacity:0.07;}
-    .logo{font-size:2.8rem;letter-spacing:3px;text-transform:uppercase;position:relative;z-index:1;color:#e63be4;text-shadow:0 0 12px #e63be4,0 0 32px #b832b7;animation:glowShift 4s infinite alternate ease-in-out;}
-    .cursor{font-family:monospace;color:#e63be4;font-size:1.2rem;animation:blink 1s infinite,glowShift 4s infinite alternate ease-in-out;position:absolute;bottom:40px;}
-
-    @keyframes blink{50%{opacity:0;}}
-    @keyframes glowShift{0%{text-shadow:0 0 6px #b832b7,0 0 16px #b832b7;}100%{text-shadow:0 0 16px #e63be4,0 0 36px #f472f8;}}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>neuronight.io</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  html,body{height:100%;margin:0;background:#000;color:#f5d9f9;font-family:'Orbitron',sans-serif;overflow:hidden;}
+  body{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;}
+  canvas#noise{position:fixed;inset:0;z-index:0;opacity:0.07;}
+  .logo{font-size:2.8rem;letter-spacing:3px;text-transform:uppercase;position:relative;z-index:1;color:#e63be4;
+        text-shadow:0 0 12px #e63be4,0 0 32px #b832b7;animation:glowShift 4s infinite alternate ease-in-out;}
+  .cursor{font-family:monospace;color:#e63be4;font-size:1.2rem;animation:blink 1s infinite,glowShift 4s infinite alternate ease-in-out;
+          position:absolute;bottom:40px;}
+  @keyframes blink{50%{opacity:0;}}
+  @keyframes glowShift{0%{text-shadow:0 0 6px #b832b7,0 0 16px #b832b7;}100%{text-shadow:0 0 16px #e63be4,0 0 36px #f472f8;}}
+  .enter{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:2;cursor:pointer;user-select:none;text-decoration:none;}
+  .arrow{width:26px;height:26px;border-right:2px solid #e63be4;border-bottom:2px solid #e63be4;transform:rotate(45deg);
+         animation:float 2s infinite ease-in-out;}
+  @keyframes float{0%{transform:translate(-2px,-2px) rotate(45deg);}50%{transform:translate(2px,2px) rotate(45deg);}
+                   100%{transform:translate(-2px,-2px) rotate(45deg);}}
+</style>
 </head>
 <body>
   <canvas id="noise"></canvas>
   <div class="logo">NEURONIGHT</div>
   <div class="cursor">>_</div>
+
+  <!-- Arrow now links to nyx.html -->
+  <a href="nyx.html" class="enter">
+    <div class="arrow"></div>
+  </a>
+
   <script>
-    const canvas = document.getElementById('noise');
-    const ctx = canvas.getContext('2d');
+    const canvas=document.getElementById('noise');
+    const ctx=canvas.getContext('2d');
     let w,h,imageData,buffer,len;
     function resize(){canvas.width=w=innerWidth;canvas.height=h=innerHeight;imageData=ctx.createImageData(w,h);buffer=imageData.data;len=buffer.length;}
     resize();addEventListener('resize',resize);
-    (function loop(){
-      for(let i=0;i<len;i+=4){let c=Math.random()*255;buffer[i]=buffer[i+1]=buffer[i+2]=c;buffer[i+3]=255;}
-      ctx.putImageData(imageData,0,0);requestAnimationFrame(loop);
-    })();
+    (function loop(){for(let i=0;i<len;i+=4){let c=Math.random()*255;buffer[i]=buffer[i+1]=buffer[i+2]=c;buffer[i+3]=255;}
+    ctx.putImageData(imageData,0,0);requestAnimationFrame(loop);})();
   </script>
 </body>
 </html>
